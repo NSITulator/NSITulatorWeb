@@ -19,26 +19,11 @@
 				<h2>Calculate your overall percentage across semesters</h2>
 				<h5>After automatically dropping the subjects with the least marks in each of the 3 categories</h5>
 			</center>
-			<br>
-			<!-- <div class="dropdown">
-			  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
-			    Number of Sems
-			    <span class="caret"></span>
-			  	</button>
-			  	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-			    	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">1</a></li>
-			    	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">2</a></li>
-			    	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">3</a></li>
-			    	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">4</a></li>
-			    	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">5</a></li>
-			    	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">6</a></li>
-			  	</ul>
-			</div> -->
 		</div>
 		<center>
 			<div class="container" id="optionsContainer">
-				<label for="branchSelect">Branch:&nbsp;&nbsp;</label>
-				<select id="branchSelect" class="selectpicker" data-style="btn-info">
+				<label for="branchSelect">Branch:</label>
+				<select id="branchSelect" class="selectpicker col-md-2" data-style="btn-info">
 			      <option value="coe">COE</option>
 			      <option value="ece">ECE</option>
 			      <option value="ice">ICE</option>
@@ -46,15 +31,15 @@
 			      <option value="mpae">MPAE</option>
 			      <option value="bt">BT</option>
 				</select>
-				<label for="sectionSelect">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section:&nbsp;&nbsp;</label>
-				<select id="sectionSelect" class="selectpicker" data-style="btn-info">
+				<label for="sectionSelect">Section:</label>
+				<select id="sectionSelect" class="selectpicker col-md-2" data-style="btn-info">
 				  <option value="0">Section</option>
 			      <option value="1">1</option>
 			      <option value="2">2</option>
 			      <option value="3">3</option>
 				</select>
-				<label for="semSelect">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of semesters:&nbsp;&nbsp;</label>
-			  	<select id="semSelect" class="selectpicker" data-style="btn-info">
+				<label for="semSelect">Semesters:</label>
+			  	<select id="semSelect" class="selectpicker col-md-2" data-style="btn-info">
 			    	<option value="1">1</option>
 			      	<option value="2">2</option>
 			      	<option value="3">3</option>
@@ -66,17 +51,13 @@
 			  	<button class="btn btn-primary" type="button" onclick="showForm()">Submit</button>
 			</div>
 		</center>
-		<!-- <div class="container" id="mainContainer" style="display:none; float:left; max-width:50%; margin-top:2%; margin-left:2%; border:2px #e4e4e4 solid;">
-		</div>
-		<div class="container" id="dataContainer" style="display:none; float:right; margin-right:5%; margin-top:2%; margin-left:3%; max-width:40%; border:2px #e4e4e4 solid;">
-		</div> -->
 		<div class="col-md-6" id="mainContainer" style="display:none; max-width:50%; margin-top:2%; margin-left:2%; margin-bottom:10%; border:2px #e4e4e4 solid;"></div>
 		<div class="col-md-6" id="dataContainer" style="display:none; margin-right:5%; margin-top:2%; margin-bottom:10%; margin-left:3%; max-width:40%;"></div>
 		</div>
 		<footer class="footer">
 			<div class="container">
 				<p class="text-muted">
-					The requirement of specifying your section was added so that your rank within your section can be calculated.<br>
+					The requirement of specifying your section has been added so that your rank within your section can be calculated.<br>
 					Anonymous data may be collected for analysis purposes.<br>
 					<b>Developed by Udit Arora</b>
 				</p>
@@ -85,28 +66,28 @@
 	</body>
 
 	<script>
-		function getUrlParameter(sParam)
-		{
-		    var sPageURL = window.location.search.substring(1);
-		    var sURLVariables = sPageURL.split('&');
-		    for (var i = 0; i < sURLVariables.length; i++) 
-		    {
-		        var sParameterName = sURLVariables[i].split('=');
-		        if (sParameterName[0] == sParam) 
-		        {
-		            return sParameterName[1];
-		        }
-		    }
-		}
+		// function getUrlParameter(sParam)
+		// {
+		//     var sPageURL = window.location.search.substring(1);
+		//     var sURLVariables = sPageURL.split('&');
+		//     for (var i = 0; i < sURLVariables.length; i++) 
+		//     {
+		//         var sParameterName = sURLVariables[i].split('=');
+		//         if (sParameterName[0] == sParam) 
+		//         {
+		//             return sParameterName[1];
+		//         }
+		//     }
+		// }
 		// numberOfSems = getUrlParameter('sems');
 		// branchName = getUrlParameter('branch');
 		// if (branchName && numberOfSems) {
 		// 	// document.getElementById('optionsContainer').style.display = 'none';
 		// 	loadForm();
 		// }
-		debug = getUrlParameter('debug');
-		if (!debug)
-			debug = false;		
+		// debug = getUrlParameter('debug');
+		// if (!debug)
+		// 	debug = false;		
 	</script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap-select.min.js"></script>

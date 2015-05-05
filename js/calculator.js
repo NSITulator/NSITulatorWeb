@@ -88,8 +88,8 @@ var calculate = function(option) {
 				// console.log("sno: " + sno + ", value: " + value);
 			}
 
-			if (debug && value == 0)
-				value = Math.random()*100;
+			// if (debug && value == 0)
+			// 	value = Math.random()*100;
 
 			semMarks += branches[branchName][sem].subjects.theory[i].credits*value;
 
@@ -123,8 +123,8 @@ var calculate = function(option) {
 				value = myMarks[sem][sno];
 			}
 
-			if (debug && value == 0)
-				value = Math.random()*100;
+			// if (debug && value == 0)
+			// 	value = Math.random()*100;
 
 			semMarks += branches[branchName][sem].subjects.practical[i].credits*value;
 		}
