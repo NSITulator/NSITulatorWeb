@@ -194,7 +194,8 @@ var calculate = function(option) {
 
 	document.getElementById('dataContainer').style.display = '';
 	window.scrollTo(0,100);
-	saveToLocal();
+	if (option != 0)
+		saveToLocal();
 };
 
 var saveToLocal = function() {

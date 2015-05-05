@@ -8,4 +8,4 @@ class Data(ndb.Model):
     marks = ndb.JsonProperty()
     marks_string = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
-
+    ip_address = ndb.StringProperty()

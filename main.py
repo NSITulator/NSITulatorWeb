@@ -1,7 +1,7 @@
 from flask import Flask, request
 from db import *
 app = Flask(__name__)
-app.config['DEBUG'] = True
+# app.config['DEBUG'] = True
 
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
@@ -27,8 +27,9 @@ def store_marks():
     # branch = request.form['branch']
     # section = request.form['section']
     # marks = request.form['marks']
-    #num_semesters = request.form('num_semesters'), branch = request.form('branch') ,section = request.form('section'), marks = request.form['marks']
-    data = Data(num_sems = int(request.form['num_sems']), branch = request.form['branch'], section = int(request.form['section']), marks = request.form['marks'], marks_string = request.form['marks'])
+    data = Data(num_sems = int(request.form['num_sems']), branch = request.form['branch'], \
+     section = int(request.form['section']), marks = request.form['marks'], \
+     marks_string = request.form['marks'], ip_address = request.remote_addr)
     data.put()
     return 'Success!'
 
