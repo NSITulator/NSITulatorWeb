@@ -1,10 +1,15 @@
 var showForm = function() {
 	var branchSelect = document.getElementById('branchSelect');
 	var semSelect = document.getElementById('semSelect');
+	var sectionSelect = document.getElementById('sectionSelect');
 	branchName = branchSelect.options[branchSelect.selectedIndex].value;
 	numberOfSems = semSelect.options[semSelect.selectedIndex].value;
+	sectionId = sectionSelect.options[sectionSelect.selectedIndex].value;
 	if (branchName == "ece" && numberOfSems == 6) {
 		alert("The data for ECE 6th semester isn't available. Please choose a different option.");
+	}
+	else if (sectionId == 0) {
+		alert("Please choose your section.");
 	}
 	else
 		loadForm();
@@ -189,6 +194,7 @@ var calculate = function(option) {
 
 	document.getElementById('dataContainer').style.display = '';
 	window.scrollTo(0,100);
+	saveToLocal();
 };
 
 var saveToLocal = function() {
@@ -232,6 +238,7 @@ var saveToLocal = function() {
 	console.log(userMarks);
 	var jsonString = JSON.stringify(userMarks);
 	window.localStorage.setItem('userMarks_'+branchName, jsonString);
+	sendToServer(jsonString);
 };
 
 var loadFromLocal = function() {
@@ -255,3 +262,16 @@ var loadFromLocal = function() {
 	}
 	calculate(0);
 };
+
+var sendToServer = function(userMarks) {
+	var postData = {"num_sems": parseInt(numberOfSems), "branch": branchName, "section": parseInt(sectionId), "marks": userMarks};
+	$.ajax({
+		type: "POST",
+		url: '/store_marks',
+		data: postData,
+		success: function(data) {
+        	console.log("Stored marks: " + data); 
+    	},
+		dataType: 'json'
+	});
+}

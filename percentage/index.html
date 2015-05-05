@@ -4,13 +4,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/css/bootstrap-select.min.css">
+		<link rel="stylesheet" href="/css/footer.css">
 		<title>The NSIT percentage calculator</title>
 		<script src="/js/allSubjects.js"></script>
 		<!-- <script src="myMarks.js"></script> -->
+		<script type="text/javascript" src="/js/jquery-2.1.1.js"></script>
 		<script type="text/javascript" src="/js/calculator.js"></script>
 	</head>
 
 	<body>
+		<div>
 		<div class="jumbotron">
 			<center>
 				<h2>Calculate your overall percentage across semesters</h2>
@@ -43,7 +46,14 @@
 			      <option value="mpae">MPAE</option>
 			      <option value="bt">BT</option>
 				</select>
-				<label for="semSelect">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of semesters:&nbsp;&nbsp;</label>
+				<label for="sectionSelect">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section:&nbsp;&nbsp;</label>
+				<select id="sectionSelect" class="selectpicker" data-style="btn-info">
+				  <option value="0">Section</option>
+			      <option value="1">1</option>
+			      <option value="2">2</option>
+			      <option value="3">3</option>
+				</select>
+				<label for="semSelect">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of semesters:&nbsp;&nbsp;</label>
 			  	<select id="semSelect" class="selectpicker" data-style="btn-info">
 			    	<option value="1">1</option>
 			      	<option value="2">2</option>
@@ -56,10 +66,21 @@
 			  	<button class="btn btn-primary" type="button" onclick="showForm()">Submit</button>
 			</div>
 		</center>
-		<div class="container" id="mainContainer" style="display:none; float:left; max-width:50%; margin-top:2%; margin-left:2%; border:2px #e4e4e4 solid;">
+		<!-- <div class="container" id="mainContainer" style="display:none; float:left; max-width:50%; margin-top:2%; margin-left:2%; border:2px #e4e4e4 solid;">
 		</div>
 		<div class="container" id="dataContainer" style="display:none; float:right; margin-right:5%; margin-top:2%; margin-left:3%; max-width:40%; border:2px #e4e4e4 solid;">
+		</div> -->
+		<div class="col-md-6" id="mainContainer" style="display:none; max-width:50%; margin-top:2%; margin-left:2%; margin-bottom:10%; border:2px #e4e4e4 solid;"></div>
+		<div class="col-md-6" id="dataContainer" style="display:none; margin-right:5%; margin-top:2%; margin-bottom:10%; margin-left:3%; max-width:40%;"></div>
 		</div>
+		<footer class="footer">
+			<div class="container">
+				<p class="text-muted">
+					The requirement of specifying your section was added so that your rank within your section can be calculated.<br>
+				The data collected anonymously from this site may be used for analysis purposes.
+				</p>
+			</div>
+		</footer>
 	</body>
 
 	<script>
@@ -76,17 +97,16 @@
 		        }
 		    }
 		}
-		numberOfSems = getUrlParameter('sems');
-		branchName = getUrlParameter('branch');
-		if (branchName && numberOfSems) {
-			// document.getElementById('optionsContainer').style.display = 'none';
-			loadForm();
-		}
+		// numberOfSems = getUrlParameter('sems');
+		// branchName = getUrlParameter('branch');
+		// if (branchName && numberOfSems) {
+		// 	// document.getElementById('optionsContainer').style.display = 'none';
+		// 	loadForm();
+		// }
 		debug = getUrlParameter('debug');
 		if (!debug)
 			debug = false;		
 	</script>
-	<script type="text/javascript" src="/js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap-select.min.js"></script>
 	<script>

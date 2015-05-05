@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from db import *
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -21,6 +21,16 @@ def hello():
     """Return a friendly HTTP greeting."""
     return 'Hello World!'
 
+@app.route('/store_marks', methods=['POST'])
+def store_marks():
+    # num_semesters = request.form['num_semesters']
+    # branch = request.form['branch']
+    # section = request.form['section']
+    # marks = request.form['marks']
+    #num_semesters = request.form('num_semesters'), branch = request.form('branch') ,section = request.form('section'), marks = request.form['marks']
+    data = Data(num_sems = int(request.form['num_sems']), branch = request.form['branch'], section = int(request.form['section']), marks = request.form['marks'], marks_string = request.form['marks'])
+    data.put()
+    return 'Success!'
 
 @app.errorhandler(404)
 def page_not_found(e):

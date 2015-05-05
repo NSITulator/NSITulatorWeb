@@ -1,8 +1,11 @@
-from google.appengine.ext  import ndb
+from google.appengine.ext import ndb
 
 
-class Request(ndb.Model):
-    semester_attempted = ndb.IntegerProperty(indexed = False)
-    branch = ndb.StringProperty(indexed = False)
-    marks = ndb.StringProperty(repeated=True, indexed = False)
+class Data(ndb.Model):
+    num_sems = ndb.IntegerProperty()
+    branch = ndb.StringProperty()
+    section = ndb.IntegerProperty()
+    marks = ndb.JsonProperty()
+    marks_string = ndb.StringProperty(indexed=False)
+    date = ndb.DateTimeProperty(auto_now_add=True)
 
