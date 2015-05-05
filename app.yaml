@@ -5,8 +5,21 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: .*
+
+- url: /js
+  static_dir: js
+
+- url: /css
+  static_dir: css
+
+- url: /(.+)
   script: main.app
+
+- url: /
+  static_files: percentage/index.html
+  upload: percentage/index.html
+
+
 
 libraries:
 - name: jinja2

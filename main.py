@@ -1,4 +1,5 @@
 from flask import Flask
+from db import *
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -24,7 +25,7 @@ def hello():
 @app.errorhandler(404)
 def page_not_found(e):
     """Return a custom 404 error."""
-    return 'Sorry, Nothing at this URL.', 404
+    return 'Sorry, Nothing at this URL. BulBULle', 404
 
 
 @app.errorhandler(500)
