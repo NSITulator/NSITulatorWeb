@@ -418,10 +418,10 @@ branches = {
 				{"sno" : "PR1", "code" : 306, "name" : "Analog and Digital Communication", "credits" : 2},
 				{"sno" : "PR2", "code" : 307, "name" : "Digital Integrated Circuits I", "credits" : 2},
 				{"sno" : "PR3", "code" : 308, "name" : "Linear Integrated Circuits", "credits" : 2},
-				{"sno" : "PR4", "code" : 309, "name" : "Programming III", "credits" : 2}
+				{"sno" : "VS1", "code" : 309, "name" : "Programming III", "credits" : 1}
 			]
 		},
-		"totalCredits" : 28,
+		"totalCredits" : 27,
 		"semester" : 5
 	},
 	{

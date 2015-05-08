@@ -1,3 +1,9 @@
+var iceFix = function() {
+	if (localStorage.getItem('userMarks_ice') && !localStorage.getItem('iceSem5Fix')) {
+		alert("There was a slight inaccuracy in ICE 5th sem credit allocation, which has been fixed now. Please re-calculate your result. (You can load your previously entered marks via clicking on the Calculate from local storage button)");
+	}
+}
+
 var showForm = function() {
 	var branchSelect = document.getElementById('branchSelect');
 	var semSelect = document.getElementById('semSelect');
@@ -196,6 +202,10 @@ var calculate = function(option) {
 	window.scrollTo(0,100);
 	if (option != 0)
 		saveToLocal();
+	// Fix for ICE 5th sem Programming III being marked PR4 with 2 credits instead of VS1 with 1 credit.
+	if (!localStorage.getItem('iceSem5Fix') && branchName == "ice" && numberOfSems >= 5) {
+		localStorage.setItem('iceSem5Fix', true);
+	}
 };
 
 var saveToLocal = function() {
