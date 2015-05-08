@@ -521,7 +521,7 @@ branches = {
 				{"sno" : "PR3", "code" : 218, "name" : "Manufacturing Processes II Lab", "credits" : 2},
 				{"sno" : "PR4", "code" : 219, "name" : "Practical Training", "credits" : 2},
 				{"sno" : "VS1", "code" : 220, "name" : "Report Writing", "credits" : 1},
-				{"sno" : "VS1", "code" : 220, "name" : "Programming II", "credits" : 1}
+				{"sno" : "VS2", "code" : 221, "name" : "Programming II", "credits" : 1}
 			]
 		},
 		"totalCredits" : 30,
