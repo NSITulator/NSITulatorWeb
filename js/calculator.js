@@ -2,6 +2,9 @@ var iceFix = function() {
 	if (localStorage.getItem('userMarks_ice') && !localStorage.getItem('iceSem5Fix')) {
 		alert("There was a slight inaccuracy in ICE 5th sem credit allocation in the Programming III Lab, which has been fixed now. Please re-calculate your result. (You can load your previously entered marks via clicking on the Calculate from local storage button)");
 	}
+	else {
+		localStorage.setItem('iceSem5Fix', true);
+	}
 }
 
 var showForm = function() {
