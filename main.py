@@ -1,5 +1,6 @@
 from flask import Flask, request
 from db import *
+import json
 app = Flask(__name__)
 # app.config['DEBUG'] = True
 
@@ -32,6 +33,30 @@ def store_marks():
      marks_string = request.form['marks'], ip_address = request.remote_addr)
     data.put()
     return 'Success!'
+
+@app.route('/test')
+def test():
+    data = Data.query(ndb.AND(Data.branch == "coe", Data.num_sems == 5))
+    # return str(data.fetch())
+    average, unique, marks_list = get_average_marks(data.fetch())
+    return "Average marks in English in COE: " + str(average) + "<br>\nNumber of entries: " + str(data.count()) + "<br>\nNumber of unique entries: " + str(unique) + "<br>\nList of marks: " + str(marks_list)
+
+def get_average_marks(data):
+    sum_marks = 0
+    count = 0
+    marks_list = {}
+    for d in data:
+        j = json.loads(d.marks_string)
+        if d.ip_address not in marks_list:
+            marks_list[d.ip_address] = int(j[0]["TH1"])
+        else:
+            marks_list[d.ip_address] = max(marks_list[d.ip_address], int(j[0]["TH1"]))
+    for marks in marks_list.values():
+        if marks == 0:
+            continue
+        sum_marks += marks
+        count += 1
+    return float(sum_marks)/count, count, marks_list.values()
 
 @app.errorhandler(404)
 def page_not_found(e):
