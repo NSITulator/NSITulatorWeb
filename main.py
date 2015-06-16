@@ -44,7 +44,7 @@ def test():
 @app.route('/test_marks/<num_sems>')
 def test_marks(num_sems):
     num_sems = int(num_sems)
-    data = Data.query(ndb.AND(Data.branch == "coe", Data.num_sems == num_sems))
+    data = Data.query(ndb.AND(Data.branch == "coe", Data.num_sems == num_sems)).order(Data.date)
     output_str = "Number of entities: "+str(data.count())+"<br><br><br>"
     result = data.fetch()
     for idx, entity in enumerate(result):
