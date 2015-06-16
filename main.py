@@ -41,6 +41,23 @@ def test():
     average, unique, marks_list = get_average_marks(data.fetch())
     return "Average marks in English in COE: " + str(average) + "<br>\nNumber of entries: " + str(data.count()) + "<br>\nNumber of unique entries: " + str(unique) + "<br>\nList of marks: " + str(marks_list)
 
+@app.route('/test_marks/<num_sems>')
+def test_marks(num_sems):
+    num_sems = int(num_sems)
+    data = Data.query(ndb.AND(Data.branch == "coe", Data.num_sems == num_sems))
+    output_str = "Number of entities: "+str(data.count())+"<br><br><br>"
+    result = data.fetch()
+    for idx, entity in enumerate(result):
+        # del entity['ip_address']
+        output_str += 'Entity '+str(idx)+":<br>"
+        output_str += 'Date/time: '+str(entity.date)+'<br>'
+        output_str += 'Number of sems: '+str(entity.num_sems)+'<br>'
+        output_str += 'Section: '+str(entity.section)+'<br>'
+        output_str += 'Marks: <br>'+str(entity.marks_string)
+        # output_str += str(entity)
+        output_str += '<br><br><br><br>'
+    return output_str
+
 def get_average_marks(data):
     sum_marks = 0
     count = 0
