@@ -321,6 +321,36 @@ branches = {
 		},
 		"totalCredits" : 29,
 		"semester" : 6
+	},
+	{
+		"subjects" : {
+			"humanities" : [],
+			"applied" : [],
+			"core" : [
+				{"sno" : "TH1", "code" : 401, "name" : "", "credits" : 4},
+				{"sno" : "TH2", "code" : 402, "name" : "DBMS", "credits" : 4},
+				{"sno" : "TH3", "code" : 403, "name" : "OS", "credits" : 4},
+				{"sno" : "TH4", "code" : 404, "name" : "Control Engineering", "credits" : 4},
+				{"sno" : "TH4", "code" : 405, "name" : "ACA", "credits" : 4},
+			],
+			"theory" : [
+				{"sno" : "TH1", "code" : 401, "name" : "", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 402, "name" : "DBMS", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 403, "name" : "OS", "credits" : 4, "category" : "C"},
+				{"sno" : "TH4", "code" : 404, "name" : "Control Engineering", "credits" : 4, "category" : "C"},
+				{"sno" : "TH5", "code" : 405, "name" : "ACA", "credits" : 4, "category" : "C"}
+
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 406, "name" : "", "credits" : 2},
+				{"sno" : "PR2", "code" : 407, "name" : "DBMS", "credits" : 2},
+				{"sno" : "PR3", "code" : 408, "name" : "Control Engineering", "credits" : 2},
+				{"sno" : "PR4", "code" : 409, "name" : "Practical Training", "credits" : 3},
+				{"sno" : "VS1", "code" : 410, "name" : "System Programming Language", "credits" : 1}
+			]
+		},
+		"totalCredits" : 30,
+		"semester" : 7
 	}
 	],
 	"ice" : [
