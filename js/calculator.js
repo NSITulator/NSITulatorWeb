@@ -301,6 +301,9 @@ var importJSON = function(files) {
 	if (jsonFile) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
+			// Reset the file input box value to allow loading of same file again
+			document.getElementById('fileElem').value = '';
+			console.log("Loaded file - name: "+jsonFile.name+", size: "+jsonFile.size+", type: "+jsonFile.type);
 			if (jsonFile.type.indexOf('json') == -1) {
 				alert("Invalid file format. Please import correct file");
 				return;
@@ -310,7 +313,6 @@ var importJSON = function(files) {
 				alert("Invalid file contents. Please import correct file");
 				return;
 			}
-			console.log("Successfully loaded file - name: "+jsonFile.name+", size: "+jsonFile.size+", type: "+jsonFile.type);
 			myMarks = JSON.parse(fileContent);
 			for (var sem = 0; sem < numberOfSems; sem++) {
 				var value, sno;
@@ -327,8 +329,6 @@ var importJSON = function(files) {
 			}
 			calculate(2);
 			window.localStorage.setItem('userMarks_'+branchName, JSON.stringify(myMarks));
-			// Reset the file input box value to allow loading of same file again
-			document.getElementById('fileElem').value = '';
 		}
 		reader.readAsText(jsonFile);
 	}
