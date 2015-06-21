@@ -1,12 +1,3 @@
-var iceFix = function() {
-	if (localStorage.getItem('userMarks_ice') && !localStorage.getItem('iceSem5Fix')) {
-		alert("There was a slight inaccuracy in ICE 5th sem credit allocation in the Programming III Lab, which has been fixed now. Please re-calculate your result. (You can load your previously entered marks via clicking on the Calculate from local storage button)");
-	}
-	else {
-		localStorage.setItem('iceSem5Fix', true);
-	}
-}
-
 var showForm = function() {
 	var branchSelect = document.getElementById('branchSelect');
 	var semSelect = document.getElementById('semSelect');
@@ -14,8 +5,8 @@ var showForm = function() {
 	branchName = branchSelect.options[branchSelect.selectedIndex].value;
 	numberOfSems = semSelect.options[semSelect.selectedIndex].value;
 	sectionId = sectionSelect.options[sectionSelect.selectedIndex].value;
-	if (branchName == "ece" && numberOfSems == 6) {
-		alert("The data for ECE 6th semester isn't available. Please choose a different option.");
+	if (branchName == "ece" && numberOfSems > 5) {
+		alert("The data for ECE after 5th semester isn't available. Please choose a different option.");
 	}
 	else if (sectionId == 0) {
 		alert("Please choose your section.");
@@ -51,8 +42,10 @@ var loadForm = function() {
 		document.getElementById('mainContainer').innerHTML += html;
 	}
 	document.getElementById('mainContainer').innerHTML += '<button onclick="calculate(1);" class="btn btn-default" style="margin-bottom:1%;">Calculate</button>';
-	document.getElementById('mainContainer').innerHTML += '&nbsp;&nbsp;&nbsp;<button onclick="saveToLocal();" class="btn btn-default" style="margin-bottom:1%;">Save marks to local storage</button>';
-	document.getElementById('mainContainer').innerHTML += '&nbsp;&nbsp;&nbsp;<button onclick="loadFromLocal();" class="btn btn-default" style="margin-bottom:1%;">Calculate from local storage</button>';
+	document.getElementById('mainContainer').innerHTML += '&nbsp;&nbsp;&nbsp;<button onclick="loadFromLocal();" class="btn btn-default" style="margin-bottom:1%;">Show Last Calculated Marks</button>';
+	document.getElementById('mainContainer').innerHTML += '&nbsp;&nbsp;&nbsp;<button onclick="exportToLocal();" class="btn btn-default" style="margin-bottom:1%;">Export Last Calculated marks</button>';
+	document.getElementById('mainContainer').innerHTML += '&nbsp;&nbsp;&nbsp;<button onclick="importFromLocal();" class="btn btn-default" style="margin-bottom:1%;">Import marks</button>';
+	document.getElementById('mainContainer').innerHTML += '<input type="file" id="fileElem" style="display:none" onchange="importJSON(this.files)">';
 	document.getElementById('mainContainer').style.display = '';
 
 	html = '';
@@ -89,7 +82,7 @@ var calculate = function(option) {
 		{
 			//get value from input field or local file based on choice
 			var value, sno;
-			if (option)
+			if (option == 1) // when calculate button is pressed
 				value = document.getElementById(''+(sem+1)+''+branches[branchName][sem].subjects.theory[i].sno).value;
 			else {
 				sno = branches[branchName][sem].subjects.theory[i].sno;
@@ -125,7 +118,7 @@ var calculate = function(option) {
 		for (var i = 0; i < branches[branchName][sem].subjects.practical.length; i++)	//iterate over the practical subjects
 		{
 			var value, sno;
-			if (option)
+			if (option == 1) // when calculate button is pressed
 				value = document.getElementById(''+(sem+1)+''+branches[branchName][sem].subjects.practical[i].sno).value;
 			else {
 				sno = branches[branchName][sem].subjects.practical[i].sno;
@@ -202,16 +195,12 @@ var calculate = function(option) {
 	dataContainer.innerHTML += '<h3>Percentage (after dropping): ' +netPercentage+ '</h3>';
 
 	document.getElementById('dataContainer').style.display = '';
+	if (option == 1)	// on click of calculate button
+		saveToLocal(true);
 	window.scrollTo(0,100);
-	if (option != 0)
-		saveToLocal();
-	// Fix for ICE 5th sem Programming III being marked PR4 with 2 credits instead of VS1 with 1 credit.
-	if (!localStorage.getItem('iceSem5Fix') && branchName == "ice" && numberOfSems >= 5) {
-		localStorage.setItem('iceSem5Fix', true);
-	}
 };
 
-var saveToLocal = function() {
+var saveToLocal = function(serverFlag) {
 	var userMarks = [
 		{"sem" : 1, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
 		"PR1" : 0,	"PR2" : 0,	"PR3" : 0,	"PR4" : 0, "PR5" : 0, "VS1" : 0, "VS2" : 0},
@@ -252,7 +241,8 @@ var saveToLocal = function() {
 	console.log(userMarks);
 	var jsonString = JSON.stringify(userMarks);
 	window.localStorage.setItem('userMarks_'+branchName, jsonString);
-	sendToServer(jsonString);
+	if (serverFlag)
+		sendToServer(jsonString);
 };
 
 var loadFromLocal = function() {
@@ -288,4 +278,92 @@ var sendToServer = function(userMarks) {
     	},
 		dataType: 'json'
 	});
+}
+
+var exportToLocal = function() {
+	myMarks = window.localStorage.getItem('userMarks_'+branchName);
+	if (!myMarks) {
+		alert("No saved data found for selected branch!");
+		return;
+	}
+	var data = "text/json;charset=utf-8," + encodeURIComponent(myMarks);
+	$('<a id="exportJSON" href="data:' + data + '" download="nsitulator_marks.json"></a>').appendTo('#mainContainer');
+	$('#exportJSON')[0].click();
+	$('#exportJSON').remove();
+}
+
+var importFromLocal = function() {
+	$('#fileElem').click();
+}
+
+var importJSON = function(files) {
+	var jsonFile = files[0];
+	if (jsonFile) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			if (jsonFile.type.indexOf('json') == -1) {
+				alert("Invalid file format. Please import correct file");
+				return;
+			}
+			var fileContent = e.target.result;
+			if (verifyJSONFile(fileContent) == false) {
+				alert("Invalid file contents. Please import correct file");
+				return;
+			}
+			console.log("Successfully loaded file - name: "+jsonFile.name+", size: "+jsonFile.size+", type: "+jsonFile.type);
+			myMarks = JSON.parse(fileContent);
+			for (var sem = 0; sem < numberOfSems; sem++) {
+				var value, sno;
+				for (var i = 0; i < 5; i++)		//iterate over the theory subjects for current sem
+				{
+					sno = branches[branchName][sem].subjects.theory[i].sno;
+					document.getElementById(''+(sem+1)+''+branches[branchName][sem].subjects.theory[i].sno).value = myMarks[sem][sno];
+				}
+				for (var i = 0; i < branches[branchName][sem].subjects.practical.length; i++)	//iterate over the practical subjects
+				{
+					sno = branches[branchName][sem].subjects.practical[i].sno;
+					document.getElementById(''+(sem+1)+''+branches[branchName][sem].subjects.practical[i].sno).value = myMarks[sem][sno];
+				}
+			}
+			calculate(2);
+			window.localStorage.setItem('userMarks_'+branchName, JSON.stringify(myMarks));
+			// Reset the file input box value to allow loading of same file again
+			document.getElementById('fileElem').value = '';
+		}
+		reader.readAsText(jsonFile);
+	}
+	else {
+		alert("Failed to load file");
+	}
+}
+
+// Check if the JSON file contains all the keys corresponding to all subjects
+var verifyJSONFile = function(content) {
+	var json = JSON.parse(content);
+	var userMarks = [
+		{"sem" : 1, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
+		"PR1" : 0,	"PR2" : 0,	"PR3" : 0,	"PR4" : 0, "PR5" : 0, "VS1" : 0, "VS2" : 0},
+		{"sem" : 2, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
+		"PR1" : 0,	"PR2" : 0,	"PR3" : 0,	"PR4" : 0, "PR5" : 0, "VS1" : 0, "VS2" : 0},
+		{"sem" : 3, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
+		"PR1" : 0,	"PR2" : 0,	"PR3" : 0,	"PR4" : 0, "PR5" : 0, "VS1" : 0, "VS2" : 0},
+		{"sem" : 4, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
+		"PR1" : 0,	"PR2" : 0,	"PR3" : 0,	"PR4" : 0, "PR5" : 0, "VS1" : 0, "VS2" : 0},
+		{"sem" : 5, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
+		"PR1" : 0,	"PR2" : 0,	"PR3" : 0,	"PR4" : 0, "PR5" : 0, "VS1" : 0, "VS2" : 0},
+		{"sem" : 6, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
+		"PR1" : 0,	"PR2" : 0,	"PR3" : 0,	"PR4" : 0, "PR5" : 0, "VS1" : 0, "VS2" : 0},
+		{"sem" : 7, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
+		"PR1" : 0,	"PR2" : 0,	"PR3" : 0,	"PR4" : 0, "PR5" : 0, "VS1" : 0, "VS2" : 0},
+		{"sem" : 8, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
+		"PR1" : 0,	"PR2" : 0,	"PR3" : 0,	"PR4" : 0, "PR5" : 0, "VS1" : 0, "VS2" : 0}
+	];
+	for (sem in userMarks) {
+		for (key in userMarks[sem]) {
+			// console.log("key: "+key);
+			if (!json[sem].hasOwnProperty(key))
+				return false;
+		}
+	}
+	return true;
 }
