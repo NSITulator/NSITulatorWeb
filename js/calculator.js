@@ -45,7 +45,7 @@ var loadForm = function() {
 	document.getElementById('mainContainer').innerHTML += '&nbsp;&nbsp;&nbsp;<button onclick="loadFromLocal();" class="btn btn-default" style="margin-bottom:1%;">Show Last Calculated Marks</button>';
 	document.getElementById('mainContainer').innerHTML += '&nbsp;&nbsp;&nbsp;<button onclick="exportToLocal();" class="btn btn-default" style="margin-bottom:1%;">Export Last Calculated marks</button>';
 	document.getElementById('mainContainer').innerHTML += '&nbsp;&nbsp;&nbsp;<button onclick="importFromLocal();" class="btn btn-default" style="margin-bottom:1%;">Import marks</button>';
-	document.getElementById('mainContainer').innerHTML += '<input type="file" id="fileElem" style="display:none" onchange="importJSON(this.files)">';
+	document.getElementById('mainContainer').innerHTML += '<input type="file" accept=".json" id="fileElem" style="display:none" onchange="importJSON(this.files)">';
 	document.getElementById('mainContainer').style.display = '';
 
 	html = '';
@@ -304,10 +304,11 @@ var importJSON = function(files) {
 			// Reset the file input box value to allow loading of same file again
 			document.getElementById('fileElem').value = '';
 			console.log("Loaded file - name: "+jsonFile.name+", size: "+jsonFile.size+", type: "+jsonFile.type);
-			if (jsonFile.type.indexOf('json') == -1) {
-				alert("Invalid file format. Please import correct file");
-				return;
-			}
+			// This is not working on Ubuntu
+			// if (jsonFile.type.indexOf('json') == -1) {
+			// 	alert("Invalid file format. Please import correct file");
+			// 	return;
+			// }
 			var fileContent = e.target.result;
 			if (verifyJSONFile(fileContent) == false) {
 				alert("Invalid file contents. Please import correct file");
