@@ -8,6 +8,9 @@ var showForm = function() {
 	if (branchName == "ece" && numberOfSems > 5) {
 		alert("The data for ECE after 5th semester isn't available. Please choose a different option.");
 	}
+	else if (branchName != "coe" && numberOfSems > 6) {
+		alert("7th and 8th sem data is only available for COE right now. That data will be added soon.");
+	}
 	else if (sectionId == 0) {
 		alert("Please choose your section.");
 	}
@@ -22,7 +25,7 @@ var loadForm = function() {
 	for (var semNum = 1; semNum <= numberOfSems; semNum++) {
 		html = '<table class="table table-hover"><caption>Semester'+semNum+
 		'</caption><thead><tr><th>#</th><th>Code</th><th>Name</th><th>Marks</th></tr></thead><tbody>';
-		for (var i = 0; i < 5; i++) {
+		for (var i = 0; i < branches[branchName][semNum-1].subjects.theory.length; i++) {
 			html += '<tr>';
 			html += '<td>'+branches[branchName][semNum-1].subjects.theory[i].sno+'</td>';
 			html += '<td>'+branchName.toUpperCase()+branches[branchName][semNum-1].subjects.theory[i].code+'</td>';
@@ -78,7 +81,7 @@ var calculate = function(option) {
 	//for all sems in range
 	for (var sem = 0; sem < numberOfSems; sem++) {
 		var semMarks = 0;	//store the total marks for current sem
-		for (var i = 0; i < 5; i++)		//iterate over the theory subjects for current sem
+		for (var i = 0; i < branches[branchName][sem].subjects.theory.length; i++)		//iterate over the theory subjects for current sem
 		{
 			//get value from input field or local file based on choice
 			var value, sno;
@@ -221,7 +224,7 @@ var saveToLocal = function(serverFlag) {
 	];
 	for (var sem = 0; sem < numberOfSems; sem++) {
 		var value, sno;
-		for (var i = 0; i < 5; i++)		//iterate over the theory subjects for current sem
+		for (var i = 0; i < branches[branchName][sem].subjects.theory.length; i++)		//iterate over the theory subjects for current sem
 		{
 			sno = branches[branchName][sem].subjects.theory[i].sno;
 			value = document.getElementById(''+(sem+1)+''+branches[branchName][sem].subjects.theory[i].sno).value;
@@ -253,7 +256,7 @@ var loadFromLocal = function() {
 	}
 	for (var sem = 0; sem < numberOfSems; sem++) {
 		var value, sno;
-		for (var i = 0; i < 5; i++)		//iterate over the theory subjects for current sem
+		for (var i = 0; i < branches[branchName][sem].subjects.theory.length; i++)		//iterate over the theory subjects for current sem
 		{
 			sno = branches[branchName][sem].subjects.theory[i].sno;
 			document.getElementById(''+(sem+1)+''+branches[branchName][sem].subjects.theory[i].sno).value = myMarks[sem][sno];
@@ -317,7 +320,7 @@ var importJSON = function(files) {
 			myMarks = JSON.parse(fileContent);
 			for (var sem = 0; sem < numberOfSems; sem++) {
 				var value, sno;
-				for (var i = 0; i < 5; i++)		//iterate over the theory subjects for current sem
+				for (var i = 0; i < branches[branchName][sem].subjects.theory.length; i++)		//iterate over the theory subjects for current sem
 				{
 					sno = branches[branchName][sem].subjects.theory[i].sno;
 					document.getElementById(''+(sem+1)+''+branches[branchName][sem].subjects.theory[i].sno).value = myMarks[sem][sno];
