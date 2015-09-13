@@ -1,6 +1,6 @@
 .index-item {
   list-style: none;
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
 }
 .index-item:hover {
@@ -10,4 +10,19 @@
   background-color: #46B8DA;
   color: white;
   margin-left: 0;
+}
+.mainContainerButtons {
+  margin: 5px;
+}
+#containers {
+  margin: 10px 0px 60px 0px;
+  padding-top: 10px;
+}
+#mainContainer, #dataContainer {
+  display:none;
+  border: 1px #e4e4e4 solid;
+  overflow: auto;
+}
+table caption {
+  padding-left: 10px; 
 }

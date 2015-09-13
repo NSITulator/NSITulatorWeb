@@ -22,13 +22,20 @@ var showForm = function() {
 
 var loadForm = function() {
   $dataContainer.style.display = 'none';
+  $mainContainer.innerHTML = "";
 
-  var string = "<div class='col-md-3 index'>";
-  for(var semNum = 1; semNum <= numberOfSems; semNum++) string += "<li class='index-item' data-target='#marksOf"+semNum+"'>Semester " + semNum + "</li>";
-  $mainContainer.innerHTML = string + "</div>";
+  var html;
+  if(numberOfSems > 1) {
+    html = "<button class='btn btn-default mainContainerButtons' id='toggleIndex'>&lt;</button> Please enter your marks"+
+    "<div class='row'>"+ "<div class='col-md-2 index'>";
+    for(var semNum = 1; semNum <= numberOfSems; semNum++) html += "<li class='index-item' data-target='#marksOf"+semNum+"'>Semester " + semNum + "</li>";
+    html += '</div><div class="col-md-10" id="forms">';
+  } else {
+    html = "Please enter your marks<div class='row'><div class='col-md-12' id='forms'>";
+  }
 
-  for (var semNum = 1, html = '<div class="col-md-9">'; semNum <= numberOfSems; semNum++) {
-    html += '<table class="table table-hover sem-marks" id="marksOf'+semNum+'"><caption>Semester'+semNum+
+  for (var semNum = 1; semNum <= numberOfSems; semNum++) {
+    html += '<table class="table table-hover sem-marks" id="marksOf'+semNum+'"><caption> Semester'+semNum+
       '</caption><thead><tr><th>#</th><th>Code</th><th>Name</th><th>Credits</th><th>Marks</th></tr></thead><tbody>';
     for (var i = 0; i < branches[branchName][semNum-1].subjects.theory.length; i++) {
       html += '<tr>' +
@@ -50,54 +57,59 @@ var loadForm = function() {
     }
     html += '</tbody></table>';
   }
-  $mainContainer.innerHTML += (html + "</div>");
-  $mainContainer.innerHTML += '<hr/><button onclick="calculate(1);" class="btn btn-default" style="margin-bottom:1%;">Calculate</button>' +
-    '&nbsp&nbsp&nbsp<button onclick="loadFromLocal()" class="btn btn-default" style="margin-bottom:1%">Show Last Calculated Marks</button>' +
-    '&nbsp&nbsp&nbsp<button onclick="exportToLocal()" class="btn btn-default" style="margin-bottom:1%">Export Last Calculated marks</button>' +
-    '&nbsp&nbsp&nbsp<button onclick="importFromLocal()" class="btn btn-default" style="margin-bottom:1%">Import marks</button>' +
-    '<input type="file" accept=".json" id="fileElem" style="display:none" onchange="importJSON(this.files)">';
-  $mainContainer.style.display = '';
-  $('.sem-marks').css('display', 'none');
-  $('#marksOf1').css('display', 'block');
-  $('.index-item:first-child').addClass('active');
-  $('.index-item').on('click', function(e) {
-    var $e = $(e.currentTarget);
-    $('.sem-marks').css('display', 'none');
-    $($e.attr('data-target')).css('display', 'block');
-    $('.index-item.active').removeClass('active');
-    $e.addClass('active');
-    window.scrollTo(0, $mainContainer.offsetTop);
-  });
+  html += "</div></div>";
+  $mainContainer.innerHTML += (html + '<hr/><button onclick="calculate(1);" class="btn btn-default mainContainerButtons">Calculate</button>' +
+    '<button onclick="loadFromLocal()" class="mainContainerButtons btn btn-default">Show Last Calculated Marks</button>' +
+    '<button onclick="exportToLocal()" class="mainContainerButtons btn btn-default">Export Last Calculated marks</button>' +
+    '<button onclick="importFromLocal()" class="mainContainerButtons btn btn-default">Import marks</button>' +
+    '<input type="file" accept=".json" id="fileElem" style="display:none" onchange="importJSON(this.files)">');
 
-  html = '';
-  //for (var i = 1; i <= numberOfSems; i++) {
-    //html += '<div class="panel panel-info" id="sem'+i+'Panel">'+
-      //'<div class="panel-heading">Semester '+i+'</div>'+
-      //'<div class="panel-body" id="sem'+i+'PanelBody">'+
-      //'</div>'+
-      //'</div>';
-  //}
-  html += '<div class="panel panel-warning" id="overallPanel">'+
-    '<div class="panel-heading">Overall</div>'+
-    '<div class="panel-body" id="overallPanelBody">'+
-    '</div>'+
-    '</div>';
-  //html += '<div class="panel panel-success" id="dropPanel">'+
-    //'<div class="panel-heading">After Dropping</div>'+
-    //'<div class="panel-body" id="dropPanelBody">'+
+  $mainContainer.style.display = 'block';
+  window.scrollTo(0, $mainContainer.offsetTop - 100);
+  if(numberOfSems > 1) {
+    $('.sem-marks').css('display', 'none');
+    $('#marksOf1').css('display', 'table');
+    $('.index-item:first-child').addClass('active');
+    $('#toggleIndex').on('click', function(e) {
+      var $e = e.currentTarget;
+      if($e.innerHTML === '&lt;') {
+        $e.innerHTML = '&gt;';
+        $('.index').hide('fast');
+        $('.sem-marks').css('display', 'table');
+        $('.index-item.active').removeClass('active');
+      } else {
+        $e.innerHTML = '&lt;';
+        $('.index').show('fast');
+        $('.sem-marks').css('display', 'none');
+        $('#marksOf1').css('display', 'table');
+        $('.index-item:first-child').addClass('active');
+      }
+    });
+    $('.index-item').on('click', function(e) {
+      var $e = $(e.currentTarget);
+      $('.sem-marks').css('display', 'none');
+      $($e.attr('data-target')).css('display', 'block');
+      $('.index-item.active').removeClass('active');
+      $e.addClass('active');
+      window.scrollTo(0, $mainContainer.offsetTop - 100);
+    });
+  }
+  //html = '<div class="panel panel-warning" id="overallPanel">'+
+    //'<div class="panel-heading">Overall</div>'+
+    //'<div class="panel-body" id="overallPanelBody">'+
     //'</div>'+
     //'</div>';
-  $dataContainer.innerHTML = html;
+  //$dataContainer.innerHTML = html;
 };
 
 var calculate = function(option) {
-  var htmlString = '<table class="table table-hover"><thead><tr>' + 
+  var htmlString = '<div id="chart"></div><table class="table table-hover"><thead><tr>' + 
     '<th>Semester</th><th>Marks</th><th>Credits</th><th>Percentage</th></tr></thead><tbody>';
 
   // var marks = [], percentage = [];
+  var semPercentages = [], aggregatePercentages = [];
   var totalMarks=0, totalCredits=0;
-  var minA = 100, minH = 100, minC = 100;
-  var minAName, minHName, minCName;
+  var minMarksIn = { A : { code : 0, name : "", marks : 100 }, C : { code : 0, name : "", marks : 100 }, H : { code : 0, name : "", marks : 100 } };
 
   //for all sems in range
   for (var sem = 0; sem < numberOfSems; sem++) {
@@ -121,21 +133,24 @@ var calculate = function(option) {
 
       //find minimum marks for each category
       if (branches[branchName][sem].subjects.theory[i].category == 'A') {
-        if (value < minA) {
-          minA = value;
-          minAName = branches[branchName][sem].subjects.theory[i].name;
+        if (value < minMarksIn.A.marks) {
+          minMarksIn.A.marks = value;
+          minMarksIn.A.name = branches[branchName][sem].subjects.theory[i].name;
+          minMarksIn.A.code = branchName.toUpperCase() + "-" + branches[branchName][sem].subjects.theory[i].code;
         }
       }
       else if (branches[branchName][sem].subjects.theory[i].category == 'C') {
-        if (value < minC) {
-          minC = value;
-          minCName = branches[branchName][sem].subjects.theory[i].name;
+        if (value < minMarksIn.C.marks) {
+          minMarksIn.C.marks = value;
+          minMarksIn.C.name = branches[branchName][sem].subjects.theory[i].name;
+          minMarksIn.C.code = branchName.toUpperCase() + "-" + branches[branchName][sem].subjects.theory[i].code;
         }
       }
       else if (branches[branchName][sem].subjects.theory[i].category == 'H') {
-        if (value < minH) {
-          minH = value;
-          minHName = branches[branchName][sem].subjects.theory[i].name;
+        if (value < minMarksIn.H.marks) {
+          minMarksIn.H.marks = value;
+          minMarksIn.H.name = branches[branchName][sem].subjects.theory[i].name;
+          minMarksIn.H.code = branchName.toUpperCase() + "-" + branches[branchName][sem].subjects.theory[i].code;
         }
       }
     }
@@ -157,9 +172,12 @@ var calculate = function(option) {
     // marks[sem] = semMarks;
     var semPercent = semMarks/branches[branchName][sem].totalCredits;	//percentage for current sem
     // percentage[sem] = semPercent;
+    semPercentages.push(semPercent);
 
     totalMarks += semMarks;		//store total weighted marks
     totalCredits += branches[branchName][sem].totalCredits;		//store total credits
+
+    aggregatePercentages.push(totalMarks/totalCredits);
 
     htmlString += '<tr><td>' + (sem + 1) + '</td><td>' + semMarks + '</td><td>' + branches[branchName][sem].totalCredits + 
       '</td><td>' + semPercent+ '</td></tr>';
@@ -177,44 +195,48 @@ var calculate = function(option) {
   // console.log("Total Marks: " + totalMarks);
   // console.log("Net Percentage: " + netPercentage);
 
-  var $dataContainer = document.getElementById('overallPanelBody');
-  htmlString += '</tbody></table>' + 
-    '<h4>Overall Total Marks: ' +totalMarks+ ' | ' +
-    'Overall Credits: ' +totalCredits+ '</h4>' +
-    '<h3>Overall Percentage: ' +netPercentage+ '</h3>';
+  //var $dataContainer = document.getElementById('overallPanelBody');
+  htmlString += '</tbody></table><strong>Before Dropping</strong>' + 
+    JSON2DL({'Overall Total Marks' : totalMarks, 'Overall Credits' : totalCredits, 'Overall Percentage' : netPercentage});
 
   //$dataContainer.innerHTML += '<h4>Overall Total Marks: ' +totalMarks+ '</h4>';
   //$dataContainer.innerHTML += '<h4>Overall Credits: ' +totalCredits+ '</h4>';
   //$dataContainer.innerHTML += '<h3>Overall Percentage: ' +netPercentage+ '</h3>';
 
-  // minH = 51; minA = 54; minC = 49;
+  // minMarksIn.H.marks = 51; minMarksIn.A.marks = 54; minMarksIn.C.marks = 49;
 
-  if (minH == 100) {
-    minH = 0;
+  if (minMarksIn.H.marks == 100) {
+    minMarksIn.H.marks = 0;
     totalCredits += 4;
   }
-  if (minA == 100) {
-    minA = 0;
+  if (minMarksIn.A.marks == 100) {
+    minMarksIn.A.marks = 0;
     totalCredits += 4;
   }
-  if (minC == 100) {
+  if (minMarksIn.C.marks == 100) {
     totalCredits += 4;
-    minC = 0;
+    minMarksIn.C.marks = 0;
+  }
+  
+  for(var type in minMarksIn) {
+    if(minMarksIn[type].marks > netPercentage) {
+      minMarksIn[type].name = '<em>*' + minMarksIn[type].name + '</em>';
+    }
   }
 
   //dataContainer = document.getElementById('dropPanelBody');
   //dataContainer.innerHTML = '';
-  //dataContainer.innerHTML += "<h5>Dropping:<br>Humanities- "+minHName+", "+minH+ 
-    //"<br>Applied- "+minAName+", "+minA+ "<br>Core- "+minCName+", "+minC+ "</h5><br>";
-  // console.log("Dropping - H: "+minHName+", "+minH+ ". A: "+minAName+", "+minA+ ". C: "+minCName+", "+minC);
+  //dataContainer.innerHTML += "<h5>Dropping:<br>Humanities- "+minMarksIn.H.name+", "+minMarksIn.H.marks+ 
+  //"<br>Applied- "+minMarksIn.A.name+", "+minMarksIn.A.marks+ "<br>Core- "+minMarksIn.C.name+", "+minMarksIn.C.marks+ "</h5><br>";
+  // console.log("Dropping - H: "+minMarksIn.H.name+", "+minMarksIn.H.marks+ ". A: "+minMarksIn.A.name+", "+minMarksIn.A.marks+ ". C: "+minMarksIn.C.name+", "+minMarksIn.C.marks);
 
   //drop the subjects with minimum marks
   console.log("Total marks: "+totalMarks);
-  totalMarks = totalMarks - (minH*4);
-  totalMarks = totalMarks - (minA*4);
-  totalMarks = totalMarks - (minC*4);
+  totalMarks = totalMarks - (minMarksIn.H.marks*4);
+  totalMarks = totalMarks - (minMarksIn.A.marks*4);
+  totalMarks = totalMarks - (minMarksIn.C.marks*4);
 
-  // totalMarks = totalMarks - ((minH+minA+minC)*4);
+  // totalMarks = totalMarks - ((minMarksIn.H.marks+minMarksIn.A.marks+minMarksIn.C.marks)*4);
   console.log("After drop marks: " + totalMarks);
   totalCredits = totalCredits - 12;
   netPercentage = totalMarks/totalCredits;
@@ -225,21 +247,23 @@ var calculate = function(option) {
   //dataContainer.innerHTML += '<h4>Overall Credits (after dropping): ' +totalCredits+ '</h4><br>';
   //dataContainer.innerHTML += '<h3>Percentage (after dropping): ' +netPercentage+ '</h3>';
 
-  htmlString +=  "<hr/><h5>Dropping:<br>Humanities- "+minHName+", "+minH+ 
-    "<br>Applied- "+minAName+", "+minA+ "<br>Core- "+minCName+", "+minC+ "</h5><br>" +
-    '<em><strong>Note:</strong> These are the lowest scoring subjects in each category,' +
-    'you may get a better percentage without dropping a subject if the marks scored in it are greater than your aggregate</em>'+
-    '<h4>Overall Total Marks(after dropping): ' +totalMarks+ '</h4>' +
-    '<h4>Overall Credits(after dropping): ' +totalCredits+ '</h4>' +
-    '<h3>Overall Percentage(after dropping): ' +netPercentage+ '</h3>';
+  htmlString +=  "<strong>Dropping following Subjects</strong>" + 
+    JSON2DL({ 'Humanities' : minMarksIn.H.name + ' ' + minMarksIn.H.code + ' (' + minMarksIn.H.marks + ')', 
+      'Applied' : minMarksIn.A.name + ' '+ minMarksIn.A.code + ' (' + minMarksIn.A.marks + ')', 
+        'Core' : minMarksIn.C.name + ' ' + minMarksIn.C.code + ' (' + minMarksIn.C.marks + ')' }); 
+
+  htmlString += '<strong>After Dropping</strong>'+
+  JSON2DL({'Overall Total Marks' : totalMarks, 'Overall Credits' : totalCredits, 'Overall Percentage' : netPercentage}) +
+  '<em><strong>*Note:</strong> Above dropped subjects have lowest marks in respective category,' +
+  'you may get a better percentage without dropping a subject if the marks scored in it are greater than your aggregate</em>';
 
   $dataContainer.innerHTML = htmlString;
-  document.getElementById('dataContainer').style.display = '';
+  document.getElementById('dataContainer').style.display = 'block';
+  drawChart([semPercentages, aggregatePercentages]);
   if (option == 1)	// on click of calculate button
-    saveToLocal(true);
+  saveToLocal(true);
   window.scrollTo(0,100);
 };
-
 var saveToLocal = function(serverFlag) {
   var userMarks = [
   {"sem" : 1, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
@@ -407,4 +431,13 @@ var verifyJSONFile = function(content) {
     }
   }
   return true;
+}
+
+
+function JSON2DL(data) {
+  var html = "<dl class='dl-horizontal'>";
+  for(var key in data) {
+    html += '<dt>' + key + '</dt><dd>' + data[key] + '</dd>';
+  }
+  return html + "</dl>";
 }

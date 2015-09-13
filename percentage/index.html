@@ -10,68 +10,67 @@
     <title>NSITulator - The NSIT percentage calculator</title>
   </head>
   <body>
-    <div>
-      <div class="jumbotron">
-        <center>
-          <h2>Calculate your overall percentage across semesters</h2>
-          <h5>After automatically dropping the subjects with the least marks in each of the 3 categories</h5>
-          <h5>In collaboration with <a href="http://collegespace.in" target="_blank">CollegeSpace</a></h5>
-        </center>
-      </div>
+    <div class="jumbotron">
       <center>
-        <p>Pro Tip: You can calculate percentage of individual semesters too by entering the marks of that semester only. Just don't tell anyone about it. Shhhhh!</p>
-        <p>To calculate 7th and 8th sem percentage, use - <a href="http://divjot.collegespace.in/o/NSITulatorJS/" target="_blank"> NSITulator v1</a></p>
-        <div class="container" id="optionsContainer">
-          <label for="branchSelect">Branch:</label>
-          <select id="branchSelect" class="selectpicker col-md-2" data-style="btn-info">
-            <option value="coe">COE</option>
-            <option value="ece">ECE</option>
-            <option value="ice">ICE</option>
-            <option value="it">IT</option>
-            <option value="mpae">MPAE</option>
-            <option value="bt">BT</option>
-          </select>
-          <label for="sectionSelect">Section:</label>
-          <select id="sectionSelect" class="selectpicker col-md-2" data-style="btn-info">
-            <option value="0">Section</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-          <label for="semSelect">Semesters:</label>
-          <select id="semSelect" class="selectpicker col-md-2" data-style="btn-info">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-          <br><br>
-          <button class="btn btn-primary" type="button" onclick="showForm()">Submit</button>
-        </div>
+        <h2>Calculate your overall percentage across semesters</h2>
+        <h5>After automatically dropping the subjects with the least marks in each of the 3 categories</h5>
+        <h5>In collaboration with <a href="http://collegespace.in" target="_blank">CollegeSpace</a></h5>
       </center>
-      <div class="col-md-6" id="mainContainer" 
-        style="display:none; max-width:50%; margin-top:2%; margin-left:2%; margin-bottom:10%; border:2px #e4e4e4 solid;"></div>
-      <div class="col-md-6" id="dataContainer"
-        style="display:none; margin-right:5%; margin-top:2%; margin-bottom:10%; margin-left:3%; max-width:40%;"></div>
     </div>
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">
-        The requirement of specifying your section has been added so that your rank within your section can be calculated.<br>
-        Anonymous data may be collected for analysis purposes.<br>
-        <b>Developed by Udit Arora</b>
-        </p>
+    <center>
+      <p>Pro Tip: You can calculate percentage of individual semesters too by 
+      entering the marks of that semester only. Just don't tell anyone about it. Shhhhh!</p>
+      <p>To calculate 7th and 8th sem percentage, use - <a href="http://divjot.collegespace.in/o/NSITulatorJS/" target="_blank"> NSITulator v1</a></p>
+      <div class="container" id="optionsContainer">
+        <label for="branchSelect">Branch:</label>
+        <select id="branchSelect" class="selectpicker col-md-2" data-style="btn-info">
+          <option value="coe">COE</option>
+          <option value="ece">ECE</option>
+          <option value="ice">ICE</option>
+          <option value="it">IT</option>
+          <option value="mpae">MPAE</option>
+          <option value="bt">BT</option>
+        </select>
+        <label for="sectionSelect">Section:</label>
+        <select id="sectionSelect" class="selectpicker col-md-2" data-style="btn-info">
+          <option value="0">Section</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        <label for="semSelect">Semesters:</label>
+        <select id="semSelect" class="selectpicker col-md-2" data-style="btn-info">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
+        <br><br>
+        <button class="btn btn-primary" type="button" onclick="showForm()">Submit</button>
       </div>
+    </center>
+    <div class="container-fluid" id="containers">
+      <div class="col-md-6" id="mainContainer"></div>
+      <div class="col-md-6" id="dataContainer"></div>
+    </div>
+
+    <footer class="footer text-center">
+      <p>The requirement of specifying your section has been added so that your rank within your section can be calculated. Anonymous data may be collected for analysis purposes.</p>
+      <p><strong>Developed by Udit Arora</strong></p>
     </footer>
   </body>
+
   <script type="text/javascript" src="/js/jquery-2.1.1.js"></script>
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/bootstrap-select.min.js"></script>
+  <script type="text/javascript" src="/js/highcharts.js"></script>
+
   <script type="text/javascript" src="/js/allSubjects.js"></script>
+  <script type="text/javascript" src="/js/chart.js"></script>
   <script type="text/javascript" src="/js/calculator.js"></script>
   <!-- <script src="myMarks.js"></script> -->
   <!--<script type="text/javascript" src="/js/urlparam.js"></script>-->
