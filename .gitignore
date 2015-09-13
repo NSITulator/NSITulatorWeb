@@ -3,3 +3,4 @@
 lib/
 !lib/README.md
 .DS_Store
+percentage/server.js

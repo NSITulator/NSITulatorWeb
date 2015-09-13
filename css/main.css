@@ -1,0 +1,13 @@
+.index-item {
+  list-style: none;
+  padding: 10px;
+  cursor: pointer;
+}
+.index-item:hover {
+  background-color: #E4E4E4;
+}
+.index-item.active {
+  background-color: #46B8DA;
+  color: white;
+  margin-left: 0;
+}
