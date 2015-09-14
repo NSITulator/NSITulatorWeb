@@ -1,3 +1,10 @@
+html {
+  /* Currently supported in Firefox & Chrome [with flags] only */
+  scroll-behavior: smooth;
+}
+.jumbotron {
+  padding: 5px 0px !important;
+}
 .index-item {
   list-style: none;
   padding: 5px;
@@ -7,7 +14,7 @@
   background-color: #E4E4E4;
 }
 .index-item.active {
-  background-color: #46B8DA;
+  background-color: #02749C;
   color: white;
   margin-left: 0;
 }
@@ -23,6 +30,8 @@
   border: 1px #e4e4e4 solid;
   overflow: auto;
 }
-table caption {
-  padding-left: 10px; 
+.container-header {
+  background-color: rgb(203, 33, 14);
+  color: white;
+  margin: 0px -15px 12px;
 }

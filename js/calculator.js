@@ -26,12 +26,12 @@ var loadForm = function() {
 
   var html;
   if(numberOfSems > 1) {
-    html = "<button class='btn btn-default mainContainerButtons' id='toggleIndex'>&lt;</button> Please enter your marks"+
+    html = "<div class='container-header'><button class='btn btn-default mainContainerButtons' id='toggleIndex'>&lt;</button> Please enter your marks</div>"+
     "<div class='row'>"+ "<div class='col-md-2 index'>";
     for(var semNum = 1; semNum <= numberOfSems; semNum++) html += "<li class='index-item' data-target='#marksOf"+semNum+"'>Semester " + semNum + "</li>";
     html += '</div><div class="col-md-10" id="forms">';
   } else {
-    html = "Please enter your marks<div class='row'><div class='col-md-12' id='forms'>";
+    html = "<div class='container-header'>Please enter your marks</div><div class='row'><div class='col-md-12' id='forms'>";
   }
 
   for (var semNum = 1; semNum <= numberOfSems; semNum++) {
@@ -58,14 +58,14 @@ var loadForm = function() {
     html += '</tbody></table>';
   }
   html += "</div></div>";
-  $mainContainer.innerHTML += (html + '<hr/><button onclick="calculate(1);" class="btn btn-default mainContainerButtons">Calculate</button>' +
+  $mainContainer.innerHTML += (html + '<hr/><div class="text-center">'+
+    '<button onclick="calculate(1);" class="btn btn-default mainContainerButtons">Calculate</button>' +
     '<button onclick="loadFromLocal()" class="mainContainerButtons btn btn-default">Show Last Calculated Marks</button>' +
-    '<button onclick="exportToLocal()" class="mainContainerButtons btn btn-default">Export Last Calculated marks</button>' +
     '<button onclick="importFromLocal()" class="mainContainerButtons btn btn-default">Import marks</button>' +
-    '<input type="file" accept=".json" id="fileElem" style="display:none" onchange="importJSON(this.files)">');
+    '<input type="file" accept=".json" id="fileElem" style="display:none" onchange="importJSON(this.files)"></div>');
 
   $mainContainer.style.display = 'block';
-  window.scrollTo(0, $mainContainer.offsetTop - 100);
+  window.scrollTo(0, $mainContainer.offsetTop - 20);
   if(numberOfSems > 1) {
     $('.sem-marks').css('display', 'none');
     $('#marksOf1').css('display', 'table');
@@ -91,7 +91,7 @@ var loadForm = function() {
       $($e.attr('data-target')).css('display', 'block');
       $('.index-item.active').removeClass('active');
       $e.addClass('active');
-      window.scrollTo(0, $mainContainer.offsetTop - 100);
+      window.scrollTo(0, $mainContainer.offsetTop - 20);
     });
   }
   //html = '<div class="panel panel-warning" id="overallPanel">'+
@@ -103,7 +103,7 @@ var loadForm = function() {
 };
 
 var calculate = function(option) {
-  var htmlString = '<div id="chart"></div><table class="table table-hover"><thead><tr>' + 
+  var htmlString = '<div class="container-header"><button onclick="exportToLocal()" class="mainContainerButtons btn btn-default">Export</button>Report Card</div><div id="chart"></div><table class="table table-hover"><thead><tr>' + 
     '<th>Semester</th><th>Marks</th><th>Credits</th><th>Percentage</th></tr></thead><tbody>';
 
   // var marks = [], percentage = [];
@@ -262,7 +262,7 @@ var calculate = function(option) {
   drawChart([semPercentages, aggregatePercentages]);
   if (option == 1)	// on click of calculate button
   saveToLocal(true);
-  window.scrollTo(0,100);
+  window.scrollTo(0, $dataContainer.offsetTop - 20);
 };
 var saveToLocal = function(serverFlag) {
   var userMarks = [
