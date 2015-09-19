@@ -259,7 +259,9 @@ var calculate = function(option) {
 
   $dataContainer.innerHTML = htmlString;
   document.getElementById('dataContainer').style.display = 'block';
-  drawChart([semPercentages, aggregatePercentages]);
+  if(numberOfSems > 3) {
+    drawChart([semPercentages, aggregatePercentages]);
+  }
   if (option == 1)	// on click of calculate button
   saveToLocal(true);
   window.scrollTo(0, $dataContainer.offsetTop - 20);
