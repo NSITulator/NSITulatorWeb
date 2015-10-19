@@ -14,7 +14,7 @@ Changelog
 
 * Version 1.5
 
-  Udit Arora (IT 2012-2016) rewrites everything in much better way offering features like 
+  Udit Arora (COE 2012-2016) rewrites everything in much better way offering features like 
   [x] Import/Export marks.
   [x] Store results in local storage of browser.
   [x] Find appropriate drop subjects.
@@ -31,4 +31,5 @@ Todo
 ====
 * Give user checkboxes to choose which subject to drop out of the suggestions.
 * Use data analysis to give recommendations to user for the current semesters.
+* Add option to calculate percentage required in future semesters to achieve specified targets.
 * Expand to other colleges.

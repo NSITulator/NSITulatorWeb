@@ -12,8 +12,8 @@ var showForm = function() {
 
   if (branchName == "ece" && numberOfSems > 5) {
     alert("The data for ECE after 5th semester isn't available. Please choose a different option.");
-  } else if (branchName != "coe" && numberOfSems > 6) {
-    alert("7th and 8th sem data is only available for COE right now. That data will be added soon.");
+  } else if ((branchName == "ice" || branchName == "bt") && numberOfSems > 6) {
+    alert("7th and 8th sem data is only available for COE, IT and MPAE right now. Data for other branches will be added soon.");
   } else if (sectionId == 0) {
     alert("Please choose your section.");
   } else

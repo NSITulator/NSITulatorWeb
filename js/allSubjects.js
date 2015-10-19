@@ -137,6 +137,45 @@ branches = {
 		},
 		"totalCredits" : 29,
 		"semester" : 6
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 401, "name" : "Internet and Web Engineering", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 402, "name" : "Distributed Systems and Computing", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 403, "name" : "Compiler and Translator Design", "credits" : 4, "category" : "C"},
+				{"sno" : "TH4", "code" : 404, "name" : "Elective - II", "credits" : 4, "category" : "A"},
+				{"sno" : "TH5", "code" : 405, "name" : "Advances in Digital System Design", "credits" : 4, "category" : "C"}
+
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 406, "name" : "Internet and Web Engineering Lab", "credits" : 2},
+				{"sno" : "PR2", "code" : 407, "name" : "Distributed Systems and Computing Lab", "credits" : 2},
+				{"sno" : "PR3", "code" : 408, "name" : "Elective II Lab", "credits" : 2},
+				{"sno" : "PR4", "code" : 409, "name" : "Compiler and Translator Design Lab", "credits" : 2},
+				{"sno" : "VS1", "code" : 410, "name" : "Practical Training", "credits" : 4},
+				{"sno" : "VS2", "code" : 411, "name" : "Minor Project", "credits" : 2}
+			]
+		},
+		"totalCredits" : 34,
+		"semester" : 7
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 412, "name" : "Information Security", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 413, "name" : "Financial and Cost Management", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 414, "name" : "Elective III", "credits" : 4, "category" : "C"}
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 415, "name" : "Elective III Lab", "credits" : 2},
+				{"sno" : "PR2", "code" : 416, "name" : "Major Project", "credits" : 8},
+				{"sno" : "PR3", "code" : 417, "name" : "Practical Training", "credits" : 4},
+				{"sno" : "VS1", "code" : 418, "name" : "Seminar Reports", "credits" : 2}
+			]
+		},
+		"totalCredits" : 28,
+		"semester" : 8
 	}
 	],
 	"coe" : [
@@ -327,14 +366,14 @@ branches = {
 			"humanities" : [],
 			"applied" : [],
 			"core" : [
-				{"sno" : "TH1", "code" : 401, "name" : "Computer and Translator Design", "credits" : 4},
+				{"sno" : "TH1", "code" : 401, "name" : "Compiler and Translator Design", "credits" : 4},
 				{"sno" : "TH2", "code" : 402, "name" : "Digital Circuits and Systems II", "credits" : 4},
 				{"sno" : "TH3", "code" : 403, "name" : "Microprocessor Applications", "credits" : 4},
 				{"sno" : "TH4", "code" : 404, "name" : "Elective I", "credits" : 4},
 				{"sno" : "TH5", "code" : 405, "name" : "Elective II", "credits" : 4},
 			],
 			"theory" : [
-				{"sno" : "TH1", "code" : 401, "name" : "Computer and Translator Design", "credits" : 4, "category" : "C"},
+				{"sno" : "TH1", "code" : 401, "name" : "Compiler and Translator Design", "credits" : 4, "category" : "C"},
 				{"sno" : "TH2", "code" : 402, "name" : "Digital Circuits and Systems II", "credits" : 4, "category" : "C"},
 				{"sno" : "TH3", "code" : 403, "name" : "Microprocessor Applications", "credits" : 4, "category" : "C"},
 				{"sno" : "TH4", "code" : 404, "name" : "Elective I", "credits" : 4, "category" : "C"},
@@ -342,7 +381,7 @@ branches = {
 
 			],
 			"practical" : [
-				{"sno" : "PR1", "code" : 406, "name" : "Computer and Translator Design", "credits" : 2},
+				{"sno" : "PR1", "code" : 406, "name" : "Compiler and Translator Design", "credits" : 2},
 				{"sno" : "PR2", "code" : 407, "name" : "Digital Circuits and Systems II", "credits" : 2},
 				{"sno" : "PR3", "code" : 408, "name" : "Electives I and II", "credits" : 2},
 				{"sno" : "PR4", "code" : 409, "name" : "Practical Training", "credits" : 3},
@@ -623,6 +662,45 @@ branches = {
 		},
 		"totalCredits" : 30,
 		"semester" : 6
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 401, "name" : "Introduction to CAD and Product Design", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 402, "name" : "Modern Methods of Manufacturing", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 403, "name" : "Industrial Electronics", "credits" : 4, "category" : "A"},
+				{"sno" : "TH4", "code" : 404, "name" : "Elective I", "credits" : 4, "category" : "C"},
+				{"sno" : "TH5", "code" : 405, "name" : "Elective II", "credits" : 4, "category" : "C"}
+
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 406, "name" : "CAD Lab", "credits" : 2},
+				{"sno" : "PR2", "code" : 407, "name" : "Modern Methods of Manufacturing Lab", "credits" : 2},
+				{"sno" : "PR3", "code" : 408, "name" : "Industrial Electronics Lab", "credits" : 2},
+				{"sno" : "PR4", "code" : 409, "name" : "Practical Training", "credits" : 2},
+				{"sno" : "VS1", "code" : 410, "name" : "Programming IV (AUTOCAD)", "credits" : 1}
+			]
+		},
+		"totalCredits" : 29,
+		"semester" : 7
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 411, "name" : "Macaronis or AI", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 412, "name" : "Elective III", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 413, "name" : "Elective IV", "credits" : 4, "category" : "C"}
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 414, "name" : "MA 411 based Lab", "credits" : 2},
+				{"sno" : "PR2", "code" : 415, "name" : "Elective III and IV Lab", "credits" : 2},
+				{"sno" : "PR3", "code" : 416, "name" : "Project", "credits" : 8},
+				{"sno" : "PR4", "code" : 417, "name" : "Practical Training", "credits" : 2},
+				{"sno" : "VS1", "code" : 418, "name" : "Seminar and Reports", "credits" : 1}
+			]
+		},
+		"totalCredits" : 27,
+		"semester" : 8
 	}
 	],
 	"ece" :[
