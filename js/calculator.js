@@ -103,7 +103,11 @@ var loadForm = function() {
 };
 
 var calculate = function(option) {
-  var htmlString = '<div class="container-header"><button onclick="exportToLocal()" class="mainContainerButtons btn btn-default">Export</button>Report Card</div><div id="chart"></div><table class="table table-hover"><thead><tr>' + 
+  var htmlString = '<div class="container-header"><button id = "exportButton" onclick="exportToLocal()" class="mainContainerButtons btn btn-default';
+  // If the user hasn't used the 'Export' feature before, animate the export button
+  if (!window.localStorage.getItem('exportedAtLeastOnce'))
+    htmlString += ' highlight-button';
+  htmlString += '">Export</button>Report Card</div><div id="chart"></div><table class="table table-hover"><thead><tr>' + 
     '<th>Semester</th><th>Marks</th><th>Credits</th><th>Percentage</th></tr></thead><tbody>';
 
   // var marks = [], percentage = [];
@@ -347,6 +351,9 @@ var sendToServer = function(userMarks) {
 }
 
 var exportToLocal = function() {
+  // Remove animation class from Export button if it is being animated
+  if (!window.localStorage.getItem('exportedAtLeastOnce'))
+    document.getElementById('exportButton').classList.remove('highlight-button');
   myMarks = window.localStorage.getItem('userMarks_'+branchName);
   if (!myMarks) {
     alert("No saved data found for selected branch!");
@@ -356,6 +363,8 @@ var exportToLocal = function() {
   $('<a id="exportJSON" href="data:' + data + '" download="nsitulator_marks.json"></a>').appendTo('#mainContainer');
   $('#exportJSON')[0].click();
   $('#exportJSON').remove();
+  // Mark this flag to stop Export button animation
+  window.localStorage.setItem('exportedAtLeastOnce', true);
 }
 
 var importFromLocal = function() {
