@@ -14,6 +14,8 @@ Changelog
   * [x] Better responsive UI.
   * [x] Cleaner layout with less scrolling required.
 
+![Screenshot](docs/2b.png)
+
 ## Version 1.5
 
   Udit Arora (COE 2012-2016) rewrites everything in much better way offering features like 
