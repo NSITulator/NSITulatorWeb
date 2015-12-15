@@ -25,6 +25,17 @@ Changelog
   * [x] Find appropriate drop subjects.
   * [x] Clean representation of every subject with their name, code and credits.
 
+## Version 1.1
+
+  Updated version released by Manraj Singh (ICE 2012-2016) and Anshuman Mishra (ECE 2013-2017) having improvements like:
+
+  * [x] Improved user interface
+  * [x] Revamped code
+  * [x] Mobile friendly
+  * [x] Clean representation of every subject with their name, code and credits
+
+You can still try it out here: http://anshuman.collegespace.in/nsitulator/
+
 ## Version 1.0
 
   Initial version released by Pulkit Aggarwal (IT 2012-2016) and Divjot Singh (COE 2012-2016). You can still try it out here : http://divjot.collegespace.in/o/NSITulatorJS
