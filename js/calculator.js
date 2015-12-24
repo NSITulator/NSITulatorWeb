@@ -43,7 +43,7 @@ var loadForm = function() {
         '<td>'+branchName.toUpperCase()+branches[branchName][semNum-1].subjects.theory[i].code+'</td>' +
         '<td>'+branches[branchName][semNum-1].subjects.theory[i].name+'</td>' +
         '<td>'+branches[branchName][semNum-1].subjects.theory[i].credits+'</td>' +
-        '<td><div class="label2"><input type="number" id="' +semNum+branches[branchName][semNum-1].subjects.theory[i].sno+ '"/></div></td>' +
+        '<td><div class="label2"><input type="number" min="0" max="100" id="' +semNum+branches[branchName][semNum-1].subjects.theory[i].sno+ '"/></div></td>' +
         '</tr>';
     }
     for (var i = 0; i < branches[branchName][semNum-1].subjects.practical.length; i++) {
@@ -52,7 +52,7 @@ var loadForm = function() {
         '<td>'+branchName.toUpperCase()+branches[branchName][semNum-1].subjects.practical[i].code+'</td>' +
         '<td>'+branches[branchName][semNum-1].subjects.practical[i].name+'</td>' +
         '<td>'+branches[branchName][semNum-1].subjects.practical[i].credits+'</td>' +
-        '<td><div class="label2"><input type="number" id="' +semNum+branches[branchName][semNum-1].subjects.practical[i].sno+ '"/></div></td>' +
+        '<td><div class="label2"><input type="number" min="0" max="100" id="' +semNum+branches[branchName][semNum-1].subjects.practical[i].sno+ '"/></div></td>' +
         '</tr>';
     }
     html += '</tbody></table>';
@@ -122,12 +122,17 @@ var calculate = function(option) {
     {
       //get value from input field or local file based on choice
       var value, sno;
-      if (option == 1) // when calculate button is pressed
+      if (option == 1) { // when calculate button is pressed
         value = document.getElementById(''+(sem+1)+''+branches[branchName][sem].subjects.theory[i].sno).value;
+      }
       else {
         sno = branches[branchName][sem].subjects.theory[i].sno;
         value = myMarks[sem][sno];
         // console.log("sno: " + sno + ", value: " + value);
+      }
+      if (value < 0 || value > 100) {
+        alert("Invalid marks for subject: "+branchName.toUpperCase()+""+branches[branchName][sem].subjects.theory[i].code+".\nMarks should be within the range [0,100].");
+        return;
       }
 
       // if (debug && value == 0)
@@ -161,11 +166,16 @@ var calculate = function(option) {
     for (var i = 0; i < branches[branchName][sem].subjects.practical.length; i++)	//iterate over the practical subjects
     {
       var value, sno;
-      if (option == 1) // when calculate button is pressed
+      if (option == 1) { // when calculate button is pressed
         value = document.getElementById(''+(sem+1)+''+branches[branchName][sem].subjects.practical[i].sno).value;
+      }
       else {
         sno = branches[branchName][sem].subjects.practical[i].sno;
         value = myMarks[sem][sno];
+      }
+      if (value < 0 || value > 100) {
+        alert("Invalid marks for subject: "+branchName.toUpperCase()+""+branches[branchName][sem].subjects.practical[i].code+".\nMarks should be within the range [0,100].");
+        return;
       }
 
       // if (debug && value == 0)
