@@ -728,7 +728,7 @@ branches = {
 			"theory" : [
 				{"sno" : "TH1", "code" : 111, "name" : "Principles of Electrical Engg", "credits" : 4, "category" : "A"},
 				{"sno" : "TH2", "code" : 112, "name" : "Applied Mechanics", "credits" : 4, "category" : "A"},
-				{"sno" : "TH3", "code" : 113, "name" : "Mathematics II", "credits" : 4, "category" : "A"},
+				{"sno" : "TH3", "code" : 113, "name" : "Mathematics II", "credits" : 4, "category" : "H"},
 				{"sno" : "TH4", "code" : 114, "name" : "Physics II", "credits" : 4, "category" : "C"},
 				{"sno" : "TH5", "code" : 115, "name" : "Electrical Engineering and Materials", "credits" : 4, "category" : "A"}
 			],
