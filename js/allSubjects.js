@@ -537,6 +537,44 @@ branches = {
 		},
 		"totalCredits" : 29,
 		"semester" : 6
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 401, "name" : "Control Systems II", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 402, "name" : "Digital Integrated Circuits II", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 403, "name" : "Process Control", "credits" : 4, "category" : "C"},
+				{"sno" : "TH4", "code" : 404, "name" : "Elective I", "credits" : 4, "category" : "C"},
+				{"sno" : "TH5", "code" : 405, "name" : "Elective II", "credits" : 4, "category" : "C"}
+
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 406, "name" : "Control Systems II", "credits" : 2},
+				{"sno" : "PR2", "code" : 407, "name" : "Digital Integrated Circuits II", "credits" : 2},
+				{"sno" : "PR3", "code" : 408, "name" : "Control Systems Lab", "credits" : 2},
+				{"sno" : "PR4", "code" : 409, "name" : "Instrumentation Lab II", "credits" : 2},
+				{"sno" : "VS1", "code" : 410, "name" : "Programming V", "credits" : 1}
+			]
+		},
+		"totalCredits" : 29,
+		"semester" : 7
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 411, "name" : "Consumer Electronics", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 412, "name" : "Elective III", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 413, "name" : "Elective IV", "credits" : 4, "category" : "C"},
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 414, "name" : "Elective III and Elective IV", "credits" : 2},
+				{"sno" : "PR2", "code" : 415, "name" : "Project", "credits" : 8},
+				{"sno" : "PR3", "code" : 416, "name" : "Practical Training", "credits" : 4},
+				{"sno" : "VS1", "code" : 417, "name" : "Seminar And Reports", "credits" : 1}
+			]
+		},
+		"totalCredits" : 27,
+		"semester" : 8
 	}
 	],
 	"mpae" : [
@@ -802,6 +840,63 @@ branches = {
 		},
 		"totalCredits" : 27,
 		"semester" : 5
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 311, "name" : "Microprocessors", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 312, "name" : "Communication Principles & Ckts", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 313, "name" : "Antennas & Propagation", "credits" : 4, "category" : "C"},
+				{"sno" : "TH4", "code" : 314, "name" : "Bipolar & Mos Analog Int Ckts", "credits" : 4, "category" : "C"},
+				{"sno" : "TH5", "code" : 315, "name" : "Filter Design", "credits" : 4, "category" : "C"}
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 316, "name" : "Microprocessors", "credits" : 2},
+				{"sno" : "PR2", "code" : 317, "name" : "Communication Principles & Ckts", "credits" : 2},
+				{"sno" : "PR3", "code" : 318, "name" : "Bipolar & Mos Analog Int Ckts", "credits" : 2},
+				{"sno" : "VS1", "code" : 319, "name" : "Programming IV", "credits" : 1},
+				{"sno" : "VS2", "code" : 320, "name" : "Practical Training", "credits" : 2}
+			]
+		},
+		"totalCredits" : 29,
+		"semester" : 6
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 401, "name" : "Microwave Engineering", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 402, "name" : "Digital Circuit & System II", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 403, "name" : "Communication System", "credits" : 4, "category" : "C"},
+				{"sno" : "TH4", "code" : 404, "name" : "Elective I", "credits" : 4, "category" : "C"},
+				{"sno" : "TH5", "code" : 405, "name" : "Elective II", "credits" : 4, "category" : "C"}
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 406, "name" : "Microwave Engineering", "credits" : 2},
+				{"sno" : "PR2", "code" : 407, "name" : "Digital Circuit & System II", "credits" : 2},
+				{"sno" : "PR3", "code" : 408, "name" : "Communication System", "credits" : 2},
+				{"sno" : "VS1", "code" : 409, "name" : "Practical Training", "credits" : 2},
+				{"sno" : "VS2", "code" : 410, "name" : "Programming V", "credits" : 1}
+			]
+		},
+		"totalCredits" : 29,
+		"semester" : 7
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 411, "name" : "Consumer Electronics", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 412, "name" : "Elective III", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 413, "name" : "Elective IV", "credits" : 4, "category" : "C"}
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 414, "name" : "Elective III and IV", "credits" : 2},
+				{"sno" : "PR2", "code" : 415, "name" : "Project", "credits" : 8},
+				{"sno" : "PR3", "code" : 416, "name" : "Practical Training", "credits" : 3},
+				{"sno" : "VS1", "code" : 417, "name" : "Seminar and Reports", "credits" : 1}
+			]
+		},
+		"totalCredits" : 26,
+		"semester" : 8
 	}
 	],
 	"bt" : [
@@ -920,6 +1015,44 @@ branches = {
 		},
 		"totalCredits" : 28,
 		"semester" : 6
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 401, "name" : "Computational Biology II", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 402, "name" : "Bioprocess Technology", "credits" : 4, "category" : "A"},
+				{"sno" : "TH3", "code" : 403, "name" : "Downstream Processing", "credits" : 4, "category" : "A"},
+				{"sno" : "TH4", "code" : 404, "name" : "Elective I", "credits" : 4, "category" : "C"},
+				{"sno" : "TH5", "code" : 405, "name" : "Management, Accounting and Cost Control", "credits" : 4, "category" : "C"}
+
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 406, "name" : "Computational Biology II Lab", "credits" : 2},
+				{"sno" : "PR2", "code" : 407, "name" : "Bioprocess Technology Lab", "credits" : 2},
+				{"sno" : "PR3", "code" : 408, "name" : "Downstream Processing Lab", "credits" : 2},
+				{"sno" : "PR4", "code" : 409, "name" : "Practical Training", "credits" : 4},
+				{"sno" : "VS1", "code" : 410, "name" : "Seminar", "credits" : 1}
+			]
+		},
+		"totalCredits" : 31,
+		"semester" : 7
+	},
+	{
+		"subjects" : {
+			"theory" : [
+				{"sno" : "TH1", "code" : 411, "name" : "Genomics and Proteomics", "credits" : 4, "category" : "C"},
+				{"sno" : "TH2", "code" : 412, "name" : "Elective II", "credits" : 4, "category" : "C"},
+				{"sno" : "TH3", "code" : 413, "name" : "Project Management", "credits" : 4, "category" : "C"},
+				{"sno" : "TH4", "code" : 414, "name" : "Principles of Management and Entrepreneurship development", "credits" : 4, "category" : "C"}
+			],
+			"practical" : [
+				{"sno" : "PR1", "code" : 415, "name" : "Genomics and Proteomics lab", "credits" : 2},
+				{"sno" : "PR2", "code" : 416, "name" : "Major Project", "credits" : 8},
+				{"sno" : "PR3", "code" : 417, "name" : "Practical Training/Project", "credits" : 4}
+			]
+		},
+		"totalCredits" : 30,
+		"semester" : 8
 	}
 	]
 }
