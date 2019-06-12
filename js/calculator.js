@@ -267,6 +267,15 @@ var calculate = function(option) {
   JSON2DL({'Overall Total Marks' : totalMarks, 'Overall Credits' : totalCredits, 'Overall Percentage' : netPercentage}) +
   '<em><strong>*Note:</strong> Above dropped subjects have lowest marks in respective category,' +
   'you may get a better percentage without dropping a subject if the marks scored in it are greater than your aggregate</em>';
+  
+  if(branchName == "ece" && numberOfSems > 5){
+    htmlString+='<br><em><strong>*Note:</strong> The post drop calculations might not be accurate because of the unavailability of subject categories'+
+    'of 6th ,7th and 8th sem  of ECE </em>';
+  }
+  else if (branchName == "ice" && numberOfSems > 6) {
+    htmlString+='<br><em><strong>*Note:</strong> The post drop calculations might not be accurate because of the unavailability of subject categories'+
+    'of 7th and 8th sem  of ICE </em>';
+  }
 
   $dataContainer.innerHTML = htmlString;
   document.getElementById('dataContainer').style.display = 'block';
