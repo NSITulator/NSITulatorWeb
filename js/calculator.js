@@ -10,11 +10,7 @@ var showForm = function() {
   numberOfSems = $semSelect.options[$semSelect.selectedIndex].value;
   sectionId = $sectionSelect.options[$sectionSelect.selectedIndex].value;
 
-  if (branchName == "ece" && numberOfSems > 5) {
-    alert("The data for ECE after 5th semester isn't available. Please choose a different option.");
-  } else if ((branchName == "ice" || branchName == "bt") && numberOfSems > 6) {
-    alert("7th and 8th sem data is only available for COE, IT and MPAE right now. Data for other branches will be added soon.");
-  } else if (sectionId == 0) {
+  if (sectionId == 0) {
     alert("Please choose your section.");
   } else
     loadForm();
@@ -107,7 +103,7 @@ var calculate = function(option) {
   // If the user hasn't used the 'Export' feature before, animate the export button
   if (!window.localStorage.getItem('exportedAtLeastOnce'))
     htmlString += ' highlight-button';
-  htmlString += '">Export</button>Report Card</div><div id="chart"></div><table class="table table-hover"><thead><tr>' + 
+  htmlString += '">Export</button>Report Card</div><div id="chart"></div><table class="table table-hover"><thead><tr>' +
     '<th>Semester</th><th>Marks</th><th>Credits</th><th>Percentage</th></tr></thead><tbody>';
 
   // var marks = [], percentage = [];
@@ -193,7 +189,7 @@ var calculate = function(option) {
 
     aggregatePercentages.push(totalMarks/totalCredits);
 
-    htmlString += '<tr><td>' + (sem + 1) + '</td><td>' + semMarks + '</td><td>' + branches[branchName][sem].totalCredits + 
+    htmlString += '<tr><td>' + (sem + 1) + '</td><td>' + semMarks + '</td><td>' + branches[branchName][sem].totalCredits +
       '</td><td>' + semPercent+ '</td></tr>';
     console.log("Sem "+(sem+1)+" Marks: " + semMarks);
     console.log("Percent: " + semPercent);
@@ -210,7 +206,7 @@ var calculate = function(option) {
   // console.log("Net Percentage: " + netPercentage);
 
   //var $dataContainer = document.getElementById('overallPanelBody');
-  htmlString += '</tbody></table><strong>Before Dropping</strong>' + 
+  htmlString += '</tbody></table><strong>Before Dropping</strong>' +
     JSON2DL({'Overall Total Marks' : totalMarks, 'Overall Credits' : totalCredits, 'Overall Percentage' : netPercentage});
 
   //$dataContainer.innerHTML += '<h4>Overall Total Marks: ' +totalMarks+ '</h4>';
@@ -231,7 +227,7 @@ var calculate = function(option) {
     totalCredits += 4;
     minMarksIn.C.marks = 0;
   }
-  
+
   for(var type in minMarksIn) {
     if(minMarksIn[type].marks > netPercentage) {
       minMarksIn[type].name = '<em>*' + minMarksIn[type].name + '</em>';
@@ -240,7 +236,7 @@ var calculate = function(option) {
 
   //dataContainer = document.getElementById('dropPanelBody');
   //dataContainer.innerHTML = '';
-  //dataContainer.innerHTML += "<h5>Dropping:<br>Humanities- "+minMarksIn.H.name+", "+minMarksIn.H.marks+ 
+  //dataContainer.innerHTML += "<h5>Dropping:<br>Humanities- "+minMarksIn.H.name+", "+minMarksIn.H.marks+
   //"<br>Applied- "+minMarksIn.A.name+", "+minMarksIn.A.marks+ "<br>Core- "+minMarksIn.C.name+", "+minMarksIn.C.marks+ "</h5><br>";
   // console.log("Dropping - H: "+minMarksIn.H.name+", "+minMarksIn.H.marks+ ". A: "+minMarksIn.A.name+", "+minMarksIn.A.marks+ ". C: "+minMarksIn.C.name+", "+minMarksIn.C.marks);
 
@@ -261,15 +257,24 @@ var calculate = function(option) {
   //dataContainer.innerHTML += '<h4>Overall Credits (after dropping): ' +totalCredits+ '</h4><br>';
   //dataContainer.innerHTML += '<h3>Percentage (after dropping): ' +netPercentage+ '</h3>';
 
-  htmlString +=  "<strong>Dropping following Subjects</strong>" + 
-    JSON2DL({ 'Humanities' : minMarksIn.H.name + ' ' + minMarksIn.H.code + ' (' + minMarksIn.H.marks + ')', 
-      'Applied' : minMarksIn.A.name + ' '+ minMarksIn.A.code + ' (' + minMarksIn.A.marks + ')', 
-        'Core' : minMarksIn.C.name + ' ' + minMarksIn.C.code + ' (' + minMarksIn.C.marks + ')' }); 
+  htmlString +=  "<strong>Dropping following Subjects</strong>" +
+    JSON2DL({ 'Humanities' : minMarksIn.H.name + ' ' + minMarksIn.H.code + ' (' + minMarksIn.H.marks + ')',
+      'Applied' : minMarksIn.A.name + ' '+ minMarksIn.A.code + ' (' + minMarksIn.A.marks + ')',
+        'Core' : minMarksIn.C.name + ' ' + minMarksIn.C.code + ' (' + minMarksIn.C.marks + ')' });
 
   htmlString += '<strong>After Dropping</strong>'+
   JSON2DL({'Overall Total Marks' : totalMarks, 'Overall Credits' : totalCredits, 'Overall Percentage' : netPercentage}) +
-  '<em><strong>*Note:</strong> Above dropped subjects have lowest marks in respective category,' +
-  'you may get a better percentage without dropping a subject if the marks scored in it are greater than your aggregate</em>';
+  '<em><strong>*Note:</strong> Above dropped subjects have lowest marks in respective category.' +
+  ' You may get a better percentage without dropping a subject if the marks scored in it are greater than your aggregate.</em>';
+  
+  if(branchName == "ece" && numberOfSems > 5){
+    htmlString+='<br><em><strong>*Note:</strong> The post-drop calculation might not be accurate because of the unavailability of subject categories'+
+    ' of 6th, 7th and 8th sem of ECE.</em>';
+  }
+  else if (branchName == "ice" && numberOfSems > 6) {
+    htmlString+='<br><em><strong>*Note:</strong> The post-drop calculation might not be accurate because of the unavailability of subject categories'+
+    ' of 7th and 8th sem of ICE.</em>';
+  }
 
   $dataContainer.innerHTML = htmlString;
   document.getElementById('dataContainer').style.display = 'block';
@@ -280,6 +285,7 @@ var calculate = function(option) {
   saveToLocal(true);
   window.scrollTo(0, $dataContainer.offsetTop - 20);
 };
+
 var saveToLocal = function(serverFlag) {
   var userMarks = [
   {"sem" : 1, "TH1" : 0, "TH2" : 0, "TH3" : 0, "TH4" : 0,	"TH5" : 0,
@@ -354,11 +360,11 @@ var sendToServer = function(userMarks) {
     url: '/store_marks',
     data: postData,
     success: function(data) {
-      console.log("Stored marks: " + data); 
+      console.log("Stored marks: " + data);
     },
     dataType: 'json'
   });
-}
+};
 
 var exportToLocal = function() {
   // Remove animation class from Export button if it is being animated
@@ -375,11 +381,11 @@ var exportToLocal = function() {
   $('#exportJSON').remove();
   // Mark this flag to stop Export button animation
   window.localStorage.setItem('exportedAtLeastOnce', true);
-}
+};
 
 var importFromLocal = function() {
   $('#fileElem').click();
-}
+};
 
 var importJSON = function(files) {
   var jsonFile = files[0];
@@ -421,7 +427,7 @@ var importJSON = function(files) {
   else {
     alert("Failed to load file");
   }
-}
+};
 
 // Check if the JSON file contains all the keys corresponding to all subjects
 var verifyJSONFile = function(content) {
@@ -452,8 +458,7 @@ var verifyJSONFile = function(content) {
     }
   }
   return true;
-}
-
+};
 
 function JSON2DL(data) {
   var html = "<dl class='dl-horizontal'>";
@@ -461,4 +466,4 @@ function JSON2DL(data) {
     html += '<dt>' + key + '</dt><dd>' + data[key] + '</dd>';
   }
   return html + "</dl>";
-}
+};
