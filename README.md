@@ -16,7 +16,7 @@ Changelog
 
 ![Screenshot](docs/2b.png)
 
-## Version 1.5
+## Version 2.0a
 
   Udit Arora (COE 2012-2016) rewrites everything in much better way offering features like 
 
