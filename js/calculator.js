@@ -263,7 +263,7 @@ var calculate = function(option) {
         'Core' : minMarksIn.C.name + ' ' + minMarksIn.C.code + ' (' + minMarksIn.C.marks + ')' });
 
   htmlString += '<strong>After Dropping</strong>'+
-  JSON2DL({'Overall Total Marks' : totalMarks, 'Overall Credits' : totalCredits, 'Overall Percentage' : netPercentage}) +
+  JSON2DL({'Overall Total Marks' : totalMarks, 'Overall Credits' : totalCredits, 'Overall Percentage' : netPercentage, 'CGPA (%age + 7.5) / 10': (netPercentage + 7.5) / 10}) +
   '<em><strong>*Note:</strong> Above dropped subjects have lowest marks in respective category.' +
   ' You may get a better percentage without dropping a subject if the marks scored in it are greater than your aggregate.</em>';
   
